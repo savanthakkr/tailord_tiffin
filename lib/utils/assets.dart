@@ -52,4 +52,9 @@ class Assets {
   String walletSvg = 'assets/svgs/wallet.svg';
   String passwordSvg = 'assets/svgs/password.svg';
 
+  String editSvg = 'assets/svgs/edit.svg';
+  String deleteSvg = 'assets/svgs/delete.svg';
+  String locationSvg = 'assets/svgs/location.svg';
+  String backIconSvg = 'assets/svgs/back_icon.svg';
+
 }

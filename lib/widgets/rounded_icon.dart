@@ -29,7 +29,7 @@ class RoundedIconWidget extends StatelessWidget {
           border: Border.all(color: borderColor),
           color: color,
         ),
-        padding: EdgeInsets.all(Dimensions.defaultPaddingSize*0.8),
+        padding: EdgeInsets.all(Dimensions.defaultPaddingSize*1.1),
         child: SvgPicture.asset(
           svgAsset,
         colorFilter: ColorFilter.mode(iconColor, BlendMode.srcATop),),

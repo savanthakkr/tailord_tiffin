@@ -21,7 +21,7 @@ class PrimaryButtonWidget extends StatelessWidget {
     this.backgroundColor,
     this.textColor,
     this.width = 0,
-    this.height = 50,
+    this.height = 55,
     this.radius = 10,
     this.isLoading = false,
     this.smallButton = false,

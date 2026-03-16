@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:tailoredtiffin/utils/assets.dart';
 
 import '../../controllers/address_controller.dart';
 import '../../model/address_model.dart';
@@ -39,7 +41,7 @@ class _AddressListScreenState extends State<AddressListScreen> {
               return Scaffold(
                 backgroundColor: appCtrl.appTheme.white,
                 appBar: CommonAppbar(
-                  title: 'Saved Addresses',
+                  title: 'Your Addresses',
                   backEnable: true,
                   centerTitle: true,
                   bgColor: appCtrl.appTheme.white,
@@ -56,7 +58,7 @@ class _AddressListScreenState extends State<AddressListScreen> {
                   padding: EdgeInsets.all(Dimensions.widthSize),
                   color: appCtrl.appTheme.white,
                   child: SizedBox(
-                    height: 50,
+                    height: 60,
                     width: double.infinity,
                     child: ElevatedButton.icon(
                       onPressed: () {
@@ -66,11 +68,11 @@ class _AddressListScreenState extends State<AddressListScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: appCtrl.appTheme.primary,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(Dimensions.radius),
+                          borderRadius: BorderRadius.circular(Dimensions.radius*1.2),
                         ),
                       ),
                       icon: Icon(Icons.add,color: appCtrl.appTheme.white,),
-                      label: Text("Add New Address",style: AppCss.mulishBold14.textColor(appCtrl.appTheme.white),),
+                      label: Text("Add New Address",style: AppCss.mulishBold16.textColor(appCtrl.appTheme.white),),
                     ),
                   ),
                 ),
@@ -107,10 +109,10 @@ class _AddressListScreenState extends State<AddressListScreen> {
         ),
         padding: EdgeInsets.all(Dimensions.widthSize),
         decoration: BoxDecoration(
-          color: appCtrl.appTheme.white,
+          color: address.isDefault == "1" ? appCtrl.appTheme.primary : appCtrl.appTheme.white,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: appCtrl.appTheme.borderColor,
+            color: address.isDefault == "1" ? Colors.transparent : appCtrl.appTheme.borderColor,
           ),
           boxShadow: [
             BoxShadow(
@@ -121,21 +123,15 @@ class _AddressListScreenState extends State<AddressListScreen> {
           ],
         ),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
 
             /// 📍 Location Icon
-            Container(
-              padding: const EdgeInsets.all(6),
-              decoration: BoxDecoration(
-                color: appCtrl.appTheme.primary.withOpacity(0.1),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                Icons.location_on,
-                color: appCtrl.appTheme.primary,
-                size: 20,
-              ),
+            SvgPicture.asset(
+              assets.locationSvg,
+              height: 25,
+              width: 25,
+              color: address.isDefault == "1" ? appCtrl.appTheme.white : appCtrl.appTheme.primary,
             ),
 
             addHorizontalSpace(12),
@@ -151,30 +147,30 @@ class _AddressListScreenState extends State<AddressListScreen> {
                     children: [
                       Text(
                         address.addressTitle ?? "",
-                        style: AppCss.mulishSemiBold16.textColor(
-                            appCtrl.appTheme.primary),
+                        style: AppCss.mulishSemiBold15.textColor(
+                            address.isDefault == "1" ? appCtrl.appTheme.white : appCtrl.appTheme.textColor),
                       ),
 
-                      if (address.isDefault == "1") ...[
-                        addHorizontalSpace(8),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 2),
-                          decoration: BoxDecoration(
-                            color: appCtrl.appTheme.primary.withOpacity(0.15),
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: Text(
-                            "Default",
-                            style: AppCss.mulishMedium12.textColor(
-                                appCtrl.appTheme.primary),
-                          ),
-                        ),
-                      ]
+                      // if (address.isDefault == "1") ...[
+                      //   addHorizontalSpace(8),
+                      //   Container(
+                      //     padding: const EdgeInsets.symmetric(
+                      //         horizontal: 8, vertical: 2),
+                      //     decoration: BoxDecoration(
+                      //       color: appCtrl.appTheme.primary.withOpacity(0.15),
+                      //       borderRadius: BorderRadius.circular(6),
+                      //     ),
+                      //     child: Text(
+                      //       "Default",
+                      //       style: AppCss.mulishMedium12.textColor(
+                      //           appCtrl.appTheme.primary),
+                      //     ),
+                      //   ),
+                      // ]
                     ],
                   ),
 
-                  addVerticalSpace(6),
+                  addVerticalSpace(Dimensions.heightSize*0.2),
 
                   /// Full Address
                   Text(
@@ -182,8 +178,8 @@ class _AddressListScreenState extends State<AddressListScreen> {
                         "${address.landmark}, "
                         "${address.city}, "
                         "${address.state} - ${address.pincode}",
-                    style: AppCss.mulishMedium14.textColor(
-                        appCtrl.appTheme.secondaryText),
+                    style: AppCss.mulishMedium13.textColor(
+                        address.isDefault == "1" ? appCtrl.appTheme.white : appCtrl.appTheme.secondaryText),
                   ),
 
                 ],
@@ -200,23 +196,25 @@ class _AddressListScreenState extends State<AddressListScreen> {
                       addressId: address.addressId!,
                     ));
                   },
-                  child: Icon(
-                    Icons.edit_outlined,
-                    size: 22,
-                    color: appCtrl.appTheme.secondaryText,
-                  ),
+                  child: SvgPicture.asset(
+                    assets.editSvg,
+                    height: 22,
+                    width: 22,
+                    color: address.isDefault == "1" ? appCtrl.appTheme.white : appCtrl.appTheme.primary,
+                  )
                 ),
-                addHorizontalSpace(Dimensions.widthSize*0.5),
+                addHorizontalSpace(Dimensions.widthSize*0.8),
 
                 InkWell(
                   onTap: () {
                     addressCtrl.showDeleteAddressDialog(address.addressId!);
                   },
-                  child: Icon(
-                    Icons.delete_outline_rounded,
-                    size: 22,
-                    color: appCtrl.appTheme.errorColor,
-                  ),
+                  child: SvgPicture.asset(
+                    assets.deleteSvg,
+                    height: 22,
+                    width: 22,
+                    color: address.isDefault == "1" ? appCtrl.appTheme.white : appCtrl.appTheme.errorColor,
+                  )
                 ),
               ],
             ),

@@ -65,7 +65,7 @@ class SignUpScreen extends StatelessWidget {
                     controller: regCtrl.nameController,
                       labelText: 'name'.toUpperCase(),
                   hintText: 'John Doe',
-                  validator: (value) => nameValidator(value),),
+                  validator: (value) => nameValidator(value,"Enter Name"),),
                   addVerticalSpace(Dimensions.heightSize*1.5),
                   TextFieldCommon(
                     controller: regCtrl.emailController,

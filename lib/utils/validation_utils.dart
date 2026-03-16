@@ -7,9 +7,9 @@ String? emailValidator(String? value) {
   return null;
 }
 
-String? nameValidator(String? value) {
+String? nameValidator(String? value,String error) {
   if (value != null && value.length < 3) {
-    return "Invalid First Name";
+    return error;
   }
   return null;
 }

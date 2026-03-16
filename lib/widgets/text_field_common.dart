@@ -47,7 +47,7 @@ class TextFieldCommon extends StatelessWidget {
     return TextFormField(
       maxLines: maxLines,
       focusNode: focusNode,
-      style: AppCss.mulishRegular14.textColor(appCtrl.appTheme.primary),
+      style: AppCss.mulishSemiBold14.textColor(appCtrl.appTheme.textColor),
         obscureText: obscureText,
         keyboardType: keyboardType,
         validator: validator,
@@ -63,6 +63,8 @@ class TextFieldCommon extends StatelessWidget {
         decoration: InputDecoration(
           labelText: labelText,
             floatingLabelBehavior: labelText != null ? FloatingLabelBehavior.always : FloatingLabelBehavior.never ,
+            floatingLabelStyle: AppCss.mulishSemiBold12
+                .textColor(focusedBorderColor ?? appCtrl.appTheme.primary),
             fillColor: fillColor ?? appCtrl.appTheme.textFieldColor,
             filled: labelText != null ? false : true,
             focusedBorder: OutlineInputBorder(
@@ -86,7 +88,7 @@ class TextFieldCommon extends StatelessWidget {
                         color: appCtrl.appTheme.borderColor,
                         style: BorderStyle.solid)),
             contentPadding: EdgeInsets.symmetric(
-                horizontal: Dimensions.widthSize*0.8, vertical: Dimensions.heightSize*0.5),
+                horizontal: Dimensions.widthSize*0.8, vertical: Dimensions.heightSize*1.3),
             suffixIcon: suffixIcon,
             prefixIcon: prefixIcon,
             errorStyle: AppCss.mulishRegular12.textColor(appCtrl.appTheme.errorColor),

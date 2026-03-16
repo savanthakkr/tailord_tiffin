@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tailoredtiffin/widgets/rounded_icon.dart';
 import '../utils/config.dart';
 
 class CommonAppbar extends StatelessWidget implements PreferredSizeWidget {
@@ -34,20 +35,30 @@ class CommonAppbar extends StatelessWidget implements PreferredSizeWidget {
       scrolledUnderElevation: elavation,
       elevation: elavation,
       centerTitle: centerTitle,
-      // shadowColor: appCtrl.appTheme.black,
       surfaceTintColor: Colors.transparent,
-      leadingWidth: 30,
-      toolbarHeight: kToolbarHeight*1.5,
-      title: Text(title,
+      leadingWidth: 50,
+      toolbarHeight: kToolbarHeight * 1.5,
+      title: Text(
+        title,
         style: GoogleFonts.poppins(
           color: textColor ?? appCtrl.appTheme.black,
-          fontSize:  (isBoldText && !backEnable) ? Dimensions.defaultTextSize : Dimensions.mediumTextSize,
+          fontSize: (isBoldText && !backEnable)
+              ? Dimensions.defaultTextSize
+              : Dimensions.mediumTextSize,
           fontWeight: isBoldText ? FontWeight.w700 : FontWeight.w500,
-        ),),
-      leading: backEnable ?  InkWell(
-        onTap: leadingOnTap,
-        child: Icon(Icons.arrow_back_ios_new,color: textColor,size: Dimensions.iconSizeDefault,),
-      ): null,
+        ),
+      ),
+      leading: backEnable
+          ? Padding(
+        padding: const EdgeInsets.only(left: 12),
+        child: RoundedIconWidget(
+          color: appCtrl.appTheme.logoutColor,
+          svgAsset: assets.backSvg,
+          iconColor: appCtrl.appTheme.white,
+          onTap: leadingOnTap,
+        ),
+      )
+          : null,
       automaticallyImplyLeading: false,
       actions: actions,
     );

@@ -37,13 +37,14 @@ class AddressController extends GetxController{
   double? latitude;
   double? longitude;
   Timer? _debounce;
+  String strState="",strCity="",strPincode="";
 
   @override
   void onInit() {
     super.onInit();
     getPrefs();
-    cityController.text = "Ahmedabad";
-    stateController.text = "Gujarat";
+    cityController.text = "";
+    stateController.text = "";
   }
 
   void getPrefs()
@@ -120,11 +121,11 @@ class AddressController extends GetxController{
             final ResponseModel responseModel = await ApiManager.addAddress(
                 authToken: authToken!,
               title: addressTypeText,
-              address: addressController.text,
+              address: stateController.text+","+addressController.text,
               landmark: landmarkController.text,
-              city: cityController.text,
-              state: stateController.text,
-              pincode: pincodeController.text,
+              city: strCity,
+              state: strState,
+              pincode: strPincode,
                 latitude: latitude ?? 0,
                 longitude: longitude ?? 0,
               isDefault: isDefault ? 1 : 0
@@ -170,6 +171,9 @@ class AddressController extends GetxController{
     cityController.clear();
     stateController.clear();
     pincodeController.clear();
+    strPincode = "";
+    strState = "";
+    strCity = "";
     AddressType.home;
     _isDefault = false;
     autoValidate = AutovalidateMode.disabled;
@@ -181,9 +185,14 @@ class AddressController extends GetxController{
     // nameController = TextEditingController(text: address.userAddress);
     addressController = TextEditingController(text: address.fullAddress);
     landmarkController = TextEditingController(text: address.landmark);
-    cityController = TextEditingController(text: address.city);
-    stateController = TextEditingController(text: address.state);
-    pincodeController = TextEditingController(text: address.pincode);
+    // cityController = TextEditingController(text: address.state);
+    // stateController = TextEditingController(text: address.state);
+    // pincodeController = TextEditingController(text: address.pincode);
+
+    strState = address.state!;
+    strCity = address.city!;
+    strPincode = address.pincode!;
+
     _isDefault = address.isDefault == '1' ? true : false;
     _addressType = address.addressTitle == 'Home' ? AddressType.home : address.addressTitle == 'Work' ? AddressType.work : AddressType.other;
 
@@ -202,11 +211,11 @@ class AddressController extends GetxController{
             final ResponseModel responseModel = await ApiManager.updateAddress(
                 authToken: authToken!,
                 addressId: int.parse(addressId),
-                address: addressController.text,
+                address: stateController.text+","+addressController.text,
                 landmark: landmarkController.text,
-                city: cityController.text,
-                state: stateController.text,
-                pincode: pincodeController.text,
+                city: strCity,
+                state: strState,
+                pincode: strPincode,
                 isDefault: isDefault ? 1 : 0,
                 title: addressTypeText,
             );
@@ -421,12 +430,18 @@ class AddressController extends GetxController{
 
     Placemark place = placemarks.first;
 
-    addressController.text =
-    "${place.street}, ${place.subLocality}";
+    addressController.text = "${place.street}, ${place.subLocality}, ${place.locality}, ${place.administrativeArea}, ${place.postalCode}";
 
-    cityController.text = place.locality ?? "";
-    stateController.text = place.administrativeArea ?? "";
-    pincodeController.text = place.postalCode ?? "";
+    cityController.text = place.subLocality ?? "";
+    landmarkController.text = place.street ?? "";
+    // landmarkController.text = place.subLocality ?? "";
+    // pincodeController.text = place.postalCode ?? "";
+
+    strState = place.administrativeArea ?? "";
+    strCity = place.locality ?? "";
+    strPincode = place.postalCode ?? "";
+
+    update();
   }
 
 }

@@ -69,7 +69,7 @@ class ProfileDialog extends StatelessWidget {
                                     controller: profileCtrl.nameController,
                                     labelText: 'name'.toUpperCase(),
                                     hintText: 'Enter name',
-                                    validator: (value) => nameValidator(value),): Text(
+                                    validator: (value) => nameValidator(value,"Enter Name"),): Text(
                                     profileCtrl.nameController.text,
                                     style: AppCss.mulishSemiBold20
                                         .textColor(appCtrl.appTheme.textColor),
