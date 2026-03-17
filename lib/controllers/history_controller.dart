@@ -1,12 +1,15 @@
 import 'package:get/get.dart';
 import 'package:tailoredtiffin/model/order_model.dart';
 
+import '../screens/order_details_popup.dart';
 import '../utils/config.dart';
-
+enum OrderType { all, delivered, confirmed }
 class HistoryController extends GetxController{
   bool isLoading=false;
   String? authToken,userId;
   List<OrderData> orderList = <OrderData>[];
+  OrderType _orderType = OrderType.all;
+  OrderType get orderType => _orderType;
 
   @override
   void onInit() {
@@ -19,6 +22,11 @@ class HistoryController extends GetxController{
     authToken = Prefs.shared.getString(Prefs.authToken);
     userId = Prefs.shared.getString(Prefs.userId);
     getHistory();
+  }
+
+  void setOrderType(OrderType type) {
+    _orderType = type;
+    update();
   }
 
   Future<void> getHistory() async {
@@ -70,6 +78,13 @@ class HistoryController extends GetxController{
 
   void onRefresh() {
     getHistory();
+  }
+
+  void showOrderDetailPopup(String orderId) {
+    Get.dialog(
+      OrderDetailPopup(orderId: orderId),
+      barrierDismissible: true,
+    );
   }
 
 }

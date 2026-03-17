@@ -14,7 +14,12 @@ class OrderDetailController extends GetxController{
   @override
   void onInit() {
     super.onInit();
-    orderId = Get.arguments['orderId'];
+    // orderId = Get.arguments['orderId'];
+    getPrefs();
+  }
+
+  void init(String id) {
+    orderId = id;
     getPrefs();
   }
 

@@ -7,6 +7,7 @@ class RoundedIconWidget extends StatelessWidget {
   final String svgAsset;
   final double height;
   final GestureTapCallback? onTap;
+  final double? padding;
   const RoundedIconWidget({
     super.key,
     required this.color,
@@ -14,7 +15,8 @@ class RoundedIconWidget extends StatelessWidget {
     required this.svgAsset,
     this.height = 30,
     this.borderColor = Colors.transparent,
-    this.onTap
+    this.onTap,
+    this.padding
   });
 
   @override
@@ -29,7 +31,7 @@ class RoundedIconWidget extends StatelessWidget {
           border: Border.all(color: borderColor),
           color: color,
         ),
-        padding: EdgeInsets.all(Dimensions.defaultPaddingSize*1.1),
+        padding: EdgeInsets.all(padding ?? Dimensions.defaultPaddingSize*1.1),
         child: SvgPicture.asset(
           svgAsset,
         colorFilter: ColorFilter.mode(iconColor, BlendMode.srcATop),),

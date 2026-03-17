@@ -56,5 +56,7 @@ class Assets {
   String deleteSvg = 'assets/svgs/delete.svg';
   String locationSvg = 'assets/svgs/location.svg';
   String backIconSvg = 'assets/svgs/back_icon.svg';
-
+  String orderHistorySvg = 'assets/svgs/order_history.svg';
+  String notificationSvg = 'assets/svgs/notification.svg';
+  String emailSvg = 'assets/svgs/email.svg';
 }
