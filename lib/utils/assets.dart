@@ -59,4 +59,6 @@ class Assets {
   String orderHistorySvg = 'assets/svgs/order_history.svg';
   String notificationSvg = 'assets/svgs/notification.svg';
   String emailSvg = 'assets/svgs/email.svg';
+
+  String popupImagePng = 'assets/pngs/popup_image.png';
 }
