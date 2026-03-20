@@ -8,6 +8,6 @@ class SectionTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(title,
-        style: AppCss.mulishExtraBold20.textColor(appCtrl.appTheme.textColor));
+        style: AppCss.mulishExtraBold18.textColor(appCtrl.appTheme.textColor));
   }
 }

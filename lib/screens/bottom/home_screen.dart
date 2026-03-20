@@ -73,8 +73,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemCount: homeCtrl.allMealList.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,           // 2 items per row
-                  mainAxisSpacing: 20,
-                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 15,
+                  crossAxisSpacing: 15,
                   childAspectRatio: 0.82,      // adjust for card height
                 ),
                 itemBuilder: (context, index) {

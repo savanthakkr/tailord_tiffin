@@ -27,7 +27,7 @@ class _HelpScreenState extends State<HelpScreen> {
         SafeArea(
           child: Column(
             children: [
-              addVerticalSpace(Dimensions.heightSize),
+              addVerticalSpace(Dimensions.heightSize*2),
               const SupportHeader(),
               addVerticalSpace(Dimensions.heightSize*0.5),
               const Expanded(

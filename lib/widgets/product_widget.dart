@@ -55,7 +55,7 @@ class ProductWidget extends StatelessWidget {
             decoration: BoxDecoration(
               color: appCtrl.appTheme.textFieldColor,
               borderRadius: BorderRadius.all(
-                Radius.circular(20),
+                Radius.circular(Dimensions.radius*1.5),
               ),
               boxShadow: [
                 BoxShadow(
@@ -70,13 +70,13 @@ class ProductWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(Dimensions.radius*1.5),
+                    topRight: Radius.circular(Dimensions.radius*1.5),
                   ),
                   child: Image.network(
                     "${ApiManager.imgUrl}${product.image}",
-                    height: 130,
+                    height: 120,
                     width: double.infinity,
                     fit: BoxFit.cover,
                   ),
@@ -94,12 +94,12 @@ class ProductWidget extends StatelessWidget {
                         style: AppCss.mulishBold14
                             .textColor(appCtrl.appTheme.textColor).copyWith(fontFamily: 'Poppins-SemiBold'),
                       ),
-                      addVerticalSpace(Dimensions.heightSize * 0.2),
+                      addVerticalSpace(Dimensions.heightSize * 0.05),
                       Text(
                         product.description ?? '',
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: AppCss.mulishSemiBold12
+                        style: AppCss.mulishMedium12
                             .textColor(appCtrl.appTheme.secondaryText)
                             .copyWith(fontFamily: 'Poppins-Italic'),
                       ),
